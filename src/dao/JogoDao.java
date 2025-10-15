@@ -36,7 +36,7 @@ public class JogoDao {
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(url, user, senha);
-			System.out.println("Banco de dados conectado!!!");
+			//System.out.println("Banco de dados conectado!!!");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,7 +59,7 @@ public class JogoDao {
 				String genero = rs.getString(3);
 				Date data = rs.getDate(4);
 				double nota = rs.getDouble(5);
-				Jogo jogo = new Jogo(nome, genero,data, nota);
+				Jogo jogo = new Jogo(id, nome, genero,data, nota);
 				jogos.add(jogo);
 					
 		}
@@ -115,14 +115,14 @@ public class JogoDao {
 		return null;
 		
 	}
-	public void excluirJogo(Jogo jogo) {
+	public void excluirJogo(int id) {
 		
 		String consulta = "Delete from jogo where (id = ?)";
 		try {
 			
 			Connection conn = getConexao();
 			PreparedStatement pst = conn.prepareStatement(consulta);
-			pst.setInt(1, jogo.getId());
+			pst.setInt(1, id);
 			pst.executeUpdate();
 			pst.close();
 			conn.close();
