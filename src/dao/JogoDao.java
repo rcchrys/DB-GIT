@@ -115,5 +115,20 @@ public class JogoDao {
 		return null;
 		
 	}
-
+	public void excluirJogo(Jogo jogo) {
+		
+		String consulta = "Delete from jogo where (id = ?)";
+		try {
+			
+			Connection conn = getConexao();
+			PreparedStatement pst = conn.prepareStatement(consulta);
+			pst.setInt(1, jogo.getId());
+			pst.executeUpdate();
+			pst.close();
+			conn.close();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 }
