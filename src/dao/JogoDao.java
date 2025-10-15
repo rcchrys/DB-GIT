@@ -25,7 +25,7 @@ public class JogoDao {
 		}
 		
 		// URL: onde esta meu banco de dados
-		String url = "jdbc:mysql://127.0.0.1:3306/ies"; 
+		String url = "jdbc:mysql://localhost:3306/ies"; 
 		
 		// Senha
 		String senha = "aluno123";
@@ -79,18 +79,18 @@ public class JogoDao {
 	public Jogo inserirJogo(Jogo jogoNovo) {
 		
 		String consulta = "INSERT INTO "
-				+ "jogo(nome,genero, dataLanc, nota)"
-				+ "VALUES (?,?,?,?,?)";
+				+ "jogo(nome,genero, data_lancamento, nota)"
+				+ "VALUES (?,?,?,?)";
 		
 		try {
 			Connection conn = getConexao();
 			PreparedStatement pst 
 			= conn.prepareStatement(consulta,Statement.RETURN_GENERATED_KEYS);
-			pst.setInt(1, jogoNovo.getId());
-			pst.setString(2, jogoNovo.getNome());
-			pst.setString(3, jogoNovo.getGenero());
-			pst.setDate(4, jogoNovo.getDataLancamento());
-			pst.setDouble(5, jogoNovo.getNota());
+			//pst.setInt(1, jogoNovo.getId());
+			pst.setString(1, jogoNovo.getNome());
+			pst.setString(2, jogoNovo.getGenero());
+			pst.setDate(3, jogoNovo.getDataLancamento());
+			pst.setDouble(4, jogoNovo.getNota());
 			pst.executeUpdate();
 			
 			// Pegando a chave

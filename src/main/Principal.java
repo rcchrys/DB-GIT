@@ -1,52 +1,65 @@
 package main;
 
+import java.sql.Date;
+import java.util.List;
 import java.util.Scanner;
 
+import dao.JogoDao;
 import model.Jogo;
 
 public class Principal {
 
+	static JogoDao dao = new JogoDao();
+	
 	public static void main(String[] args) {
 
+		
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("BEM-VINDO");
 
 		System.out.println("----------MENU----------");
 		System.out.println("1. CADASTRAR JOGO");
-		System.out.println("2.LISTAR JOGOS");
-		System.out.println("3.EXCLUIR UM JOGO");
-		System.out.println("4.SAIR");
-		System.out.println("");
+		System.out.println("2. LISTAR JOGOS");
+		System.out.println("3. EXCLUIR UM JOGO");
+		System.out.println("4. SAIR");
+		
 		int opcao = sc.nextInt();
+		sc.nextLine();
 
 		switch (opcao) {
-		case 1: {
+		case 1: { //quero que o jogo seja inserido após verificar se o nome dele já existe na lista.
 			
-			//quero que o jogo seja inserido após verificar se o nome dele já existe na lista.
+			System.out.println("DIGITE O NOME DO JOGO.");
+			String nomeNovo= sc.nextLine();
 			
-			Jogo jogoNovo = new Jogo();
-
+			System.out.println("DIGITE O GÊNERO DO JOGO.");
+			String generoNovo = sc.nextLine();
+			
+			System.out.println("DIGITE O DATA DE LANÇAMENTO DO JOGO - aaaa-MM-dd.");
+			String dataLancNovo = sc.nextLine();
+			Date data = Date.valueOf(dataLancNovo); // -> 
+			
+			System.out.println("DIGITE O NOTA DO JOGO.");
+			double notaNovo = sc.nextDouble();
+			
+			Jogo jogoNovo = new Jogo (nomeNovo, generoNovo, data, notaNovo);
+			jogoNovo = dao.inserirJogo(jogoNovo);
+			
 			break;
 		}
-	}
-		switch (opcao) {
+
 		case 2: {
-			
-			//mostrar a lista de jogos
-
+			listarJogos();
 			break;
 		}
-	}
-		switch (opcao) {
+		
 		case 3: {
-			
-			//excluir um jogo da lista por id ou nome
-
+			listarJogos();
+			System.out.println("DIGITE O ID DO JOGO QUE SERÁ EXCLUÍDO.");
 			break;
 		}
-	}
-		switch (opcao) {
+		
 		case 4: {
 			
 			System.out.println("FECHANDO O PROGRAMA.");
@@ -56,6 +69,12 @@ public class Principal {
 			
 			System.out.println("OPÇÃO INVÁLIDA.");
 			
+		}
+	}
+	public static void listarJogos() {
+		List<Jogo> jogos = dao.listarJogos();
+		for(Jogo jogo: jogos) {
+			System.out.println(jogo);
 		}
 	}
 }

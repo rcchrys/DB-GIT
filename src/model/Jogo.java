@@ -73,8 +73,8 @@ public class Jogo {
 
 	@Override
 	public String toString() {
-		return "Jogo [id=" + id + ", nome=" + nome + ", genero=" + genero + ", dataLancamento="
-				+ dataLancamento + ", nota=" + nota + "]";
+		return "Jogo [id=" + id + ", nome=" + nome + ", genero=" + genero + ", dataLancamento=" + dataLancamento
+				+ ", nota=" + nota + "]";
 	}
 
 }
